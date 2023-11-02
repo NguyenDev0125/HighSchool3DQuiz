@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestionItemUI : MonoBehaviour
+public class MissionItemUI : MonoBehaviour
 {
     public Sprite lockSpr;
     public Sprite unLockSpr;
@@ -16,5 +16,10 @@ public class QuestionItemUI : MonoBehaviour
     {
         icon.sprite = isUnlocked ? unLockSpr : lockSpr;
         text.text = txt;
+    }
+
+    public void Unlock()
+    {
+        icon.sprite = unLockSpr;
     }
 }

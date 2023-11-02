@@ -12,12 +12,15 @@ public class HomeUIController : MonoBehaviour
     public Button startBtn;
     public Button settingBtn;
     public Button quitBtn;
+    public Button openLoginBtn;
 
 
     private void Awake()
     {
         startBtn.onClick.AddListener(OpenSelectQuesMenu);
         settingBtn.onClick.AddListener(OpenSettingMenu);
+        quitBtn.onClick.AddListener(QuitGame);
+        openLoginBtn.onClick.AddListener(OpenLoginMenu);
     }
     private void Start()
     {
@@ -34,8 +37,13 @@ public class HomeUIController : MonoBehaviour
         // TODO : Setting
     }
 
-    public void QuitGame()
+    private void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void OpenLoginMenu()
+    {
+        loginPanel.gameObject.SetActive(true);
     }
 }

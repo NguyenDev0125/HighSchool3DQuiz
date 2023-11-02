@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class DoorController : MonoBehaviour
 {
     public Animator anim;
     private void OnTriggerEnter(Collider other)

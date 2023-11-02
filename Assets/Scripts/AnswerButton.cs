@@ -25,7 +25,6 @@ public class AnswerButton : MonoBehaviour
     public void SetText(string text)
     {
         txt.text = text;
-        
         btn.image.color = btn.colors.normalColor;
     }
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7213134c65a47349b89478ceeb9c798, type: 3}
-  m_Name: QuestionListSO
+  m_Script: {fileID: 11500000, guid: 748944e38442a72488b9dcb8dcf31f6a, type: 3}
+  m_Name: QuestionsListSO
   m_EditorClassIdentifier: 
   questions: []

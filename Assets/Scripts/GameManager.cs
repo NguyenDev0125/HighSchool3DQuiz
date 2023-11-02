@@ -1,25 +1,46 @@
+using Newtonsoft.Json;
 using StarterAssets;
 using UnityEngine;
 
 public class GameManager : SingletonGeneric<GameManager>
 {
+    public UIController UIController;
     public ThirdPersonController player;
-    public QuestionController questionController;
+    public MBTIQuestionController mbtiQuesController;
+    public ReviewQuestionController reviewQuestionController;
+    private QuestionController questionController;
     
     public GameState GameState;
+
+    public QuestionController QuestionController { get => questionController;}
+
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        int gameMode = PlayerPrefs.GetInt("gamemode", 0);
+        if(gameMode == 0)
+        {
+            questionController = mbtiQuesController;
+        }
+        else
+        {
+            questionController = reviewQuestionController;
+        }
     }
 
     private void Start()
     {
         StartingGame();
+        string mbti = "MBTI";
+        DBRequestManager.Instance.FieldDataSendRequest(APIUrls.postMBTIResultApi, mbti, PlayerPrefs.GetString("usertoken"), (s) =>
+        {
+            Debug.Log(s);
+        });
     }
     private void StartingGame()
     {
         Debug.Log("Starting game");
-        questionController.LoadQuestion();
     }
     public void ChangeState(GameState state)
     {
@@ -33,7 +54,7 @@ public class GameManager : SingletonGeneric<GameManager>
 
     public void GameVictory()
     {
-        // TO DO : Victory
+        UIController.HideUI();
     }
 }
 

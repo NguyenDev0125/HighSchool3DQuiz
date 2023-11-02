@@ -44,11 +44,13 @@ public class LoginPanel : MonoBehaviour
         }
         LoginUser user = new LoginUser(GetUsername(),GetPassword());
         string json = JsonConvert.SerializeObject(user);
-        DbRequestManager.Instance.DataSendRequest(ApiUrls.userLoginApi, json, (s) =>
+        DBRequestManager.Instance.DataSendRequest(APIUrls.userLoginApi, json, (s) =>
         {
             Debug.Log(s);
             LoginUserRespone respone = JsonConvert.DeserializeObject<LoginUserRespone>(s);
-            if(!respone.isSuccess)
+            Debug.Log(respone.result);
+            SaveAccount(loginUsernameTxt.text, loginPasswordTxt.text, respone.result);
+            if (!respone.isSuccess)
             {
                 this.gameObject.SetActive(true);
             }
@@ -60,14 +62,14 @@ public class LoginPanel : MonoBehaviour
         {
             LoginUser user = new LoginUser(loginUsernameTxt.text , loginPasswordTxt.text); 
             string json = JsonConvert.SerializeObject(user);
-            DbRequestManager.Instance.DataSendRequest(ApiUrls.userLoginApi, json , (s) =>
+            DBRequestManager.Instance.DataSendRequest(APIUrls.userLoginApi, json , (s) =>
             {
                 Debug.Log(s);
                 LoginUserRespone respone = JsonConvert.DeserializeObject<LoginUserRespone>(s);
                 if(respone.isSuccess)
                 {
                     SetStatus("Success");
-                    SaveAccount(loginUsernameTxt.text,loginPasswordTxt.text);
+                    SaveAccount(loginUsernameTxt.text,loginPasswordTxt.text , respone.result);
                     this.gameObject.SetActive(false);
                 }
                 else
@@ -84,14 +86,15 @@ public class LoginPanel : MonoBehaviour
         {
             UserRegister user = new UserRegister(registerUsernameTxt.text, registerPasswordTxt.text, registerConfirmPasswordTxt.text);
             string json = JsonConvert.SerializeObject(user);
-            DbRequestManager.Instance.DataSendRequest(ApiUrls.userRegisterApi, json, (s) =>
+            Debug.Log(json);
+            DBRequestManager.Instance.DataSendRequest(APIUrls.userRegisterApi, json, (s) =>
             {
                 Debug.Log(s);
                 LoginUserRespone respone = JsonConvert.DeserializeObject<LoginUserRespone>(s);
                 if (respone.isSuccess)
                 {
                     SetStatus("Success");
-                    SaveAccount(registerUsernameTxt.text , registerPasswordTxt.text);
+                    SaveAccount(registerUsernameTxt.text , registerPasswordTxt.text, respone.result);
                 }
                 else
                 {
@@ -122,10 +125,12 @@ public class LoginPanel : MonoBehaviour
         statusTxt.text = status;
     }
 
-    private void SaveAccount(string username , string password)
+    private void SaveAccount(string username , string password , string userToken)
     {
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("password",password);
+        PlayerPrefs.SetString("usertoken", userToken);
+        Debug.Log(userToken);
     }
 
     private string GetUsername()
@@ -136,6 +141,11 @@ public class LoginPanel : MonoBehaviour
     private string GetPassword()
     {
         return PlayerPrefs.GetString("password","");
+    }
+
+    private string GetUserToken()
+    {
+        return PlayerPrefs.GetString("usertoken", "");
     }
 
 }
@@ -161,12 +171,15 @@ public class LoginUserRespone
 
 public class UserRegister
 {
-    public string username;
+    public string userName;
     public string password;
     public string confirmPassword;
+    public string email = "";
+    public string fistName = "";
+    public string lastName = "";
     public UserRegister(string username, string password, string confirmPassword)
     {
-        this.username = username;
+        this.userName = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }

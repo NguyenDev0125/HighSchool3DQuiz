@@ -1,14 +1,15 @@
-using System.Collections;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        string json = "{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\",\r\n  \"confirmPassword\": \"string\"\r\n}";
-        DbRequestManager.Instance.DataSendRequest(ApiUrls.userRegisterApi , json );
+
+
     }
 
 }
