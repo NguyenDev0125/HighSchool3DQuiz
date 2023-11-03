@@ -62,6 +62,7 @@ public class MBTIQuestionController : QuestionController
             });
 
             string json = JsonConvert.SerializeObject(results);
+            Debug.Log(json);
             DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postMBTIResultApi, json, PlayerPrefs.GetString("usertoken"), (s) =>
             {
                 Debug.Log("Post : " + s);
