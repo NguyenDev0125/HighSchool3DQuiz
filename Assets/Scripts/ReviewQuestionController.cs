@@ -18,15 +18,7 @@ public class ReviewQuestionController : QuestionController
     {
         if (questionList.questions.Count == 0)
         {
-            GameManager.Instance.GameVictory();
-            string json = JsonConvert.SerializeObject(attempt);
-            string token = PlayerPrefs.GetString("usertoken");
-            Debug.Log(json);
-            DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postAttemptApi, json, token, (s) =>
-            {
-                Debug.Log(s);
-            });
-            GameManager.Instance.ChangeState(GameState.Playing);
+            CompleteQuestion();
 
         }
         else
@@ -50,8 +42,25 @@ public class ReviewQuestionController : QuestionController
         }
 
     }
+
+    private void CompleteQuestion()
+    {
+        GameManager.Instance.GameVictory();
+        string json = JsonConvert.SerializeObject(attempt);
+        string token = PlayerPrefs.GetString("usertoken");
+        Debug.Log(json);
+        DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postAttemptApi, json, token, (s) =>
+        {
+            Debug.Log(s);
+        });
+        GameManager.Instance.ChangeState(GameState.Playing);
+    }
     public override void DisplayRandomQuestion()
     {
+        if(questionList.questions.Count == 0)
+        {
+            CompleteQuestion();
+        }
         currQuestion = GetRandomQuestionContent();
         if(currQuestion != null)
         {

@@ -32,11 +32,7 @@ public class GameManager : SingletonGeneric<GameManager>
     private void Start()
     {
         StartingGame();
-        string mbti = "MBTI";
-        DBRequestManager.Instance.FieldDataSendRequest(APIUrls.postMBTIResultApi, mbti, PlayerPrefs.GetString("usertoken"), (s) =>
-        {
-            Debug.Log(s);
-        });
+
     }
     private void StartingGame()
     {
@@ -55,6 +51,7 @@ public class GameManager : SingletonGeneric<GameManager>
     public void GameVictory()
     {
         UIController.HideUI();
+        UIController.ShowVictory();
     }
 }
 

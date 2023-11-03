@@ -96,10 +96,7 @@ public class DBRequestManager : MonoBehaviour
 
     public IEnumerator IE_FieldDataSendRequest(string api, string data, string token , Action<string> callBack)
     {
-        WWWForm form = new WWWForm();
-        form.AddField("mbti", "MBTI");
-
-        using (UnityWebRequest www = UnityWebRequest.Post(api, form))
+        using (UnityWebRequest www = UnityWebRequest.Post(api, data))
         {
             www.SetRequestHeader("accept", "*/*");
             www.SetRequestHeader("Authorization","Bearer "+ token);

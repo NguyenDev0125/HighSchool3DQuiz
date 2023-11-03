@@ -46,13 +46,11 @@ public class MBTIQuestionController : QuestionController
                 case 3: if (result == trueAns) J++; else P++; break;
             }
         }
-        Debug.Log(MBTIquestionList.questions.Count);
         if (MBTIquestionList.questions.Count == 0)
         {
             string mbti = GetMBTIString();
 
-            mbti = JsonConvert.SerializeObject(mbti);
-            Debug.Log(mbti);
+            mbti = "\""+ mbti+"\"";
             DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postMBTIResultApi, mbti, PlayerPrefs.GetString("usertoken"), (s) =>
             {
                 Debug.Log(s);
