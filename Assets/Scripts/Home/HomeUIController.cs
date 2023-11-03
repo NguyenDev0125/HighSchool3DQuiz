@@ -8,6 +8,7 @@ public class HomeUIController : MonoBehaviour
     public GameObject homeMenu;
     public GameObject selectQuesMenu;
     public LoginPanel loginPanel;
+    public GameObject loadingPanel;
 
     public Button startBtn;
     public Button settingBtn;
@@ -45,5 +46,14 @@ public class HomeUIController : MonoBehaviour
     private void OpenLoginMenu()
     {
         loginPanel.gameObject.SetActive(true);
+    }
+
+    public void OpenLoadingPanel()
+    {
+        loadingPanel.gameObject.SetActive(true);
+    }
+    internal void Ac()
+    {
+
     }
 }

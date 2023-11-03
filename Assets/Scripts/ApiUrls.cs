@@ -10,6 +10,7 @@ public static class APIUrls
     public static readonly string postQuestionApi = baseAddress + "api/Questions";
     public static readonly string getExaminationsApi = baseAddress + "api/Examinations?pageIndex=1&pageSize=5";
     public static readonly string postAttemptApi = baseAddress + "api/Attempts";
+    public static readonly string postMBTIListApi = baseAddress + "api/MBTIs";
     public static readonly string postMBTIResultApi = baseAddress + "api/MBTIs";
 
 

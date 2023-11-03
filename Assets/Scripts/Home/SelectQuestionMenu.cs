@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SelectQuestionMenu : MonoBehaviour
 {
     public QuestionLoader questionsLoader;
+    public HomeUIController HomeUIController;
     public Button mbtiBtn;
     public Button reviewBtn;
 
@@ -18,15 +19,19 @@ public class SelectQuestionMenu : MonoBehaviour
     }
     private void LoadQuestionFromLocal()
     {
+        HomeUIController.OpenLoadingPanel();
         questionsLoader.LoadQuestionsFromLocal();
         PlayerPrefs.SetInt("gamemode", 0);
         SceneManager.LoadScene("GamePlay");
+
     }
     private void LoadQuestionFormUrl()
     {
+        HomeUIController.OpenLoadingPanel();
         questionsLoader.LoadQuestionFormAPI();
         PlayerPrefs.SetInt("gamemode", 1);
         SceneManager.LoadScene("GamePlay");
+
 
     }
 

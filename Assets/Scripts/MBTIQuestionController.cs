@@ -9,6 +9,12 @@ public class MBTIQuestionController : QuestionController
     [SerializeField] MBTIQuestionsList MBTIquestionList;
 
     private MBTIQuestionContent currQuestion;
+    private List<MBTIResult> results;
+
+    private void Awake()
+    {
+        results = new List<MBTIResult>();
+    }
     public override void DisplayRandomQuestion()
     {
         currQuestion = GetRandomQuestion();
@@ -49,25 +55,42 @@ public class MBTIQuestionController : QuestionController
         if (MBTIquestionList.questions.Count == 0)
         {
             string mbti = GetMBTIString();
-
             mbti = "\""+ mbti+"\"";
             DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postMBTIResultApi, mbti, PlayerPrefs.GetString("usertoken"), (s) =>
             {
                 Debug.Log(s);
+            });
+
+            string json = JsonConvert.SerializeObject(results);
+            DBRequestManager.Instance.DataSendRequestWithToken(APIUrls.postMBTIResultApi, json, PlayerPrefs.GetString("usertoken"), (s) =>
+            {
+                Debug.Log("Post : " + s);
             });
             GameManager.Instance.GameVictory();
             questionPanel.HidePanel();
             return;
 
         }
-        if (numQuesAnswered < numQues)
-        {
-            DisplayRandomQuestion();
-        }
         else
         {
-            GameManager.Instance.ChangeState(GameState.Playing);
-            questionPanel.HidePanel();
+            if (numQuesAnswered < numQues)
+            {
+
+                MBTIResult mbti = new MBTIResult();
+                mbti.idQues = currQuestion.IDQues.ToString();
+                mbti.nameQues = currQuestion.NameQues;
+                mbti.answer = result == 0 ? currQuestion.Ans1 : currQuestion.Ans2;
+                results.Add(mbti);
+
+                DisplayRandomQuestion();
+            }
+            else
+            {
+                GameManager.Instance.ChangeState(GameState.Playing);
+                questionPanel.HidePanel();
+            }
         }
+
     }
+
 }

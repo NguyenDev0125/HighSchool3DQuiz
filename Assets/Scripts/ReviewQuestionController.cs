@@ -19,7 +19,6 @@ public class ReviewQuestionController : QuestionController
         if (questionList.questions.Count == 0)
         {
             CompleteQuestion();
-
         }
         else
         {
@@ -91,13 +90,21 @@ internal class Attempts
         attemptDetails = new List<AttemptDetailRequest>();
     }
 }
-
 internal class AttemptDetailRequest
 {
     public string examinationQuestionId;
     public bool isCorrect;
     public string userAnswered;
 }
+public class MBTIResult
+{
+    public string idQues;
+    public string nameQues;
+    public string answer;
+    public int group;
+}
+
+
 public class QuestionStruct
 {
     public int IDQues;

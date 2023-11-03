@@ -6861,7 +6861,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00007325}
-  m_SizeDelta: {x: 0, y: 102.86}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &419431635
 MonoBehaviour:
@@ -6884,7 +6884,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 1000, y: 102.86}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 15}
   m_Constraint: 1
   m_ConstraintCount: 1
 --- !u!114 &419431636
@@ -10917,7 +10917,7 @@ MonoBehaviour:
   vfx: {fileID: 642733741}
   arrowDirection: {fileID: 1128185284}
   flag: 1
-  delayTime: 2
+  delayTime: 1
 --- !u!65 &642733746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23416,7 +23416,7 @@ MonoBehaviour:
   vfx: {fileID: 1368853856}
   arrowDirection: {fileID: 1128185284}
   flag: 0
-  delayTime: 2
+  delayTime: 1
 --- !u!65 &1368853860
 BoxCollider:
   m_ObjectHideFlags: 0
